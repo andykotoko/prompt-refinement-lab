@@ -73,6 +73,7 @@ git clone https://github.com/yuchenzhu-research/prompt-refinement-lab.git
 | **影像工程专家** | S-Log3 与色彩管理 | A7M5 拍摄及后期流程 |
 | **关系博弈策略** | 高主体性与理性沟通 | 关系内耗解决、边界设定 |
 | **百科全书系统** | 跨学科深度联结 | 系统化课题研究、学术深挖 |
+| **项目总体体检官** | 仓库全链路审计与重构前评估 | 新项目接手、重构前盘点、治理规划 |
 
 ---
 
@@ -86,7 +87,8 @@ skills/
 ├── english-writing/       # 全球英语教练模块
 ├── encyclopedic-system/   # 跨学科百科系统
 ├── photography-workflow/  # 摄影/视频 SOP 模块
-└── relationship-analyst/  # 关系博弈策略模块
+├── relationship-analyst/  # 关系博弈策略模块
+└── project-auditor/       # 项目总体体检与审计模块
 ```
 
 ---
