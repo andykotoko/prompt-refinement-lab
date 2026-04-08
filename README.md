@@ -74,6 +74,7 @@ git clone https://github.com/yuchenzhu-research/prompt-refinement-lab.git
 | **关系博弈策略** | 高主体性与理性沟通 | 关系内耗解决、边界设定 |
 | **百科全书系统** | 跨学科深度联结 | 系统化课题研究、学术深挖 |
 | **项目总体体检官** | 仓库全链路审计与重构前评估 | 新项目接手、重构前盘点、治理规划 |
+| **Local-First 应用体检官** | 前端/桌面混合应用的架构收束与交付审计 | Tauri/Electron/Next.js 本地优先项目、图片与文件工作流、多平台发布 |
 
 ---
 
@@ -88,7 +89,8 @@ skills/
 ├── encyclopedic-system/   # 跨学科百科系统
 ├── photography-workflow/  # 摄影/视频 SOP 模块
 ├── relationship-analyst/  # 关系博弈策略模块
-└── project-auditor/       # 项目总体体检与审计模块
+├── project-auditor/       # 项目总体体检与审计模块
+└── local-first-app-auditor/ # Local-First 前端/桌面应用审计模块
 ```
 
 ---
