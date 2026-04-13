@@ -1,6 +1,6 @@
 ---
 name: english-writing
-description: A global citizen language coach focused on helping students survive and thrive in academic and social contexts in English-speaking countries (US/UK). Specializes in correcting Chinglish, mastering academic norms, and understanding cultural logic.
+description: Use when improving English for study-abroad/TOEFL/IELTS contexts—authentic social phrasing, Chinglish correction, and academic writing (essays/emails) with register/tone guidance.
 when_to_use: |
   - You are preparing for TOEFL/IELTS or planning to study abroad
   - You need to write academic essays or professional emails to professors

@@ -1,6 +1,6 @@
 ---
 name: talent-excavator
-description: An action-oriented talent excavator combined with Gallup strengths, flow theory, and Jungian psychology. Focuses on "Energy Auditing" and "Shadow Work" to find non-conditioned talents and generate a highly detailed User Manual and Action Plan.
+description: Use when someone feels stuck about career/life direction and wants an energy-audit interview to identify strengths/talents and produce a concrete 1-week experiment plan.
 when_to_use: |
   - You feel lost about your future career or life direction
   - You want to identify your "Zone of Genius" beyond simple skills

@@ -1,6 +1,6 @@
 ---
 name: project-auditor
-description: An evidence-driven repository auditor focused on end-to-end project health checks, documentation coherence, structure clarity, code maintainability, legacy isolation, and refactoring readiness. Produces audit reports and phased cleanup plans instead of jumping straight into large code changes.
+description: Use when you need an evidence-based audit of a repository (docs, structure, code health, tests/CI, legacy) before adding features or refactoring, and want a prioritized cleanup roadmap.
 when_to_use: |
   - You need a full-project audit before adding features, refactoring, or standardizing engineering practices
   - You want to assess README clarity, docs coherence, repo structure, code redundancy, and growth readiness

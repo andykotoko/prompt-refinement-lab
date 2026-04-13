@@ -20,6 +20,15 @@
 1.  **Prompts (一次性调用)**：适用于 ChatGPT/Claude 网页端，即插即用，单点爆发力强。
 2.  **Skills (Agentic 系统调用)**：适用于 Claude Code, Cursor 或定制化 Agent，具备结构化的 YAML 定义，方便系统自动化检索与调用。
 
+### 什么时候用 Prompts vs Skills（快速决策）
+
+- **用 `prompts/`**
+  - 你在 ChatGPT/Claude 网页端或手机端，无法读文件/跑命令
+  - 你想快速校准角色与输出结构，进行一次或一段时间的对话式产出
+- **用 `skills/`**
+  - 你在 Claude Code / Cursor / 自建 Agent 环境，Agent 可以读写仓库并执行工作流
+  - 你需要可重复执行、可审计、能约束工程行为的流程（如项目治理、审计、PRD/ADR、i18n 架构）
+
 ---
 
 ## ⚡️ Quick Start (快速开始)
@@ -66,17 +75,34 @@ git clone https://github.com/yuchenzhu-research/prompt-refinement-lab.git
 
 建议直接复制 `prompts/` 目录下的 `.txt` 内容。
 
+### 工程治理 / 可维护性
+
+| Prompt 模块 | 核心逻辑 | 适用场景 |
+| :--- | :--- | :--- |
+| **项目锻造炉** | 多阶段可重入的项目治理骨架搭建、契约设计、PRD、ADR、漂移审计 | 新项目初始化、模块契约定义、功能规划、架构决策、持续治理 |
+| **项目总体体检官** | 仓库全链路审计与重构前评估 | 新项目接手、重构前盘点、治理规划 |
+| **Local-First 应用体检官** | 前端/桌面混合应用的架构收束与交付审计 | Tauri/Electron/Next.js 本地优先项目、图片与文件工作流、多平台发布 |
+| **国际化系统设计师** | Locale 仅为展示层、Schema 强制英文、禁止 locale 驱动的业务分叉 | 多语言项目架构设计、i18n 改造、国际化审计 |
+
+### 学习 / 写作 / 研究
+
 | Prompt 模块 | 核心逻辑 | 适用场景 |
 | :--- | :--- | :--- |
 | **全能英语教练** | 地道表达与学术规范 | 刷托福、改邮件、课业辅导 |
-| **深度天赋挖掘** | 能量审计对话流 | 个人潜力分析、职业导向 |
-| **影像工程专家** | S-Log3 与色彩管理 | A7M5 拍摄及后期流程 |
-| **关系博弈策略** | 高主体性与理性沟通 | 关系内耗解决、边界设定 |
 | **百科全书系统** | 跨学科深度联结 | 系统化课题研究、学术深挖 |
-| **项目总体体检官** | 仓库全链路审计与重构前评估 | 新项目接手、重构前盘点、治理规划 |
-| **Local-First 应用体检官** | 前端/桌面混合应用的架构收束与交付审计 | Tauri/Electron/Next.js 本地优先项目、图片与文件工作流、多平台发布 |
-| **项目锻造炉** | 多阶段可重入的项目治理骨架搭建、契约设计、PRD、ADR、漂移审计 | 新项目初始化、模块契约定义、功能规划、架构决策、持续治理 |
-| **国际化系统设计师** | Locale 仅为展示层、Schema 强制英文、禁止 locale 驱动的业务分叉 | 多语言项目架构设计、i18n 改造、国际化审计 |
+
+### 个人成长 / 关系
+
+| Prompt 模块 | 核心逻辑 | 适用场景 |
+| :--- | :--- | :--- |
+| **深度天赋挖掘** | 能量审计对话流 | 个人潜力分析、职业导向 |
+| **关系博弈策略** | 高主体性与理性沟通 | 关系内耗解决、边界设定 |
+
+### 创作者工作流
+
+| Prompt 模块 | 核心逻辑 | 适用场景 |
+| :--- | :--- | :--- |
+| **影像工程专家** | S-Log3 与色彩管理 | A7M5 拍摄及后期流程 |
 
 ---
 
@@ -86,15 +112,15 @@ git clone https://github.com/yuchenzhu-research/prompt-refinement-lab.git
 
 ```text
 skills/
-├── talent-excavator/      # 深度天赋挖掘模块
-├── english-writing/       # 全球英语教练模块
-├── encyclopedic-system/   # 跨学科百科系统
-├── photography-workflow/  # 摄影/视频 SOP 模块
-├── relationship-analyst/  # 关系博弈策略模块
+├── project-forge/         # 项目治理骨架锻造与持续收敛模块
 ├── project-auditor/       # 项目总体体检与审计模块
 ├── local-first-app-auditor/ # Local-First 前端/桌面应用审计模块
-├── project-forge/         # 项目治理骨架锻造与持续收敛模块
-└── i18n-system-designer/  # 国际化系统架构设计模块
+├── i18n-system-designer/  # 国际化系统架构设计模块
+├── english-writing/       # 全球英语教练模块
+├── encyclopedic-system/   # 跨学科百科系统
+├── talent-excavator/      # 深度天赋挖掘模块
+├── relationship-analyst/  # 关系博弈策略模块
+└── photography-workflow/  # 摄影/视频 SOP 模块
 ```
 
 ---

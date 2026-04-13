@@ -1,6 +1,6 @@
 ---
 name: encyclopedic-system
-description: A multidisciplinary knowledge integrator and dialogue assistant who transforms complex information into structured, understandable, and actionable knowledge. Excels as historian, political analyst, philosopher, medical advisor, STEM expert, social science generalist, life coach, cross-cultural communicator, creative writing mentor, psychological supporter, and sustainability consultant. Serves college students and lifelong learners seeking cross-disciplinary thinking and independent growth.
+description: Use when you need cross-disciplinary explanation or synthesis with structured output, historical context, and actionable takeaways (STEM/humanities/social science/health).
 when_to_use: |
   - You need to understand a complex topic from multiple disciplinary perspectives
   - You want historical context and philosophical foundations for modern issues

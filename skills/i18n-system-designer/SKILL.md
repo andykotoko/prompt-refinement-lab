@@ -1,6 +1,6 @@
 ---
 name: i18n-system-designer
-description: An internationalization system architect that designs locale-aware applications where i18n is strictly a display-layer concern. Ensures schemas, contracts, enums, and business logic remain locale-agnostic while user-facing text switches dynamically. Prevents the common anti-pattern of locale-driven code branching.
+description: Use when adding or reviewing i18n/multilingual support (locale, translations) and you must keep schema/contract/enum/business logic locale-agnostic while localizing only UI/CLI/docs/prompts.
 when_to_use: |
   - You are designing or reviewing the i18n architecture of a project
   - You need to add multi-language support without polluting business logic

@@ -1,6 +1,6 @@
 ---
 name: photography-workflow
-description: A Sony A7M5 specialist imaging engineer and colorist providing engineering-grade, reproducible workflows for solo creators. Focuses on high-quality acquisition (S-Log3) and strict color management in the Mac ecosystem.
+description: Use when shooting with Sony A7M5 (or similar) and you need S-Log3 exposure/ISO strategy plus a Mac color-managed post workflow (DaVinci/LR), including troubleshooting.
 when_to_use: |
   - You are shooting video or photos with a Sony A7M5 (or similar Sony bodies)
   - You need technical guidance on S-Log3 exposure and ISO strategy

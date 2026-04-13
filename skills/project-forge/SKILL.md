@@ -1,6 +1,6 @@
 ---
 name: project-forge
-description: A multi-phase, re-entrant project engineering skill that bootstraps governance documents (AGENTS.md / CONSTITUTION.md / MANUAL.md), defines typed module contracts, writes implementation-grade PRDs, records architectural decisions (ADR), and continuously audits drift between documentation and reality. Designed to be invoked repeatedly throughout a project's lifecycle — not just at creation.
+description: Use when you need to bootstrap or enforce project governance (AGENTS.md/CONSTITUTION.md/MANUAL.md), define module boundaries/contracts, write a PRD/ADR, or audit doc↔code drift in an active repo.
 when_to_use: |
   - You are starting a new project and need a governance skeleton (AGENTS.md, CONSTITUTION.md, MANUAL.md)
   - You want to define typed contracts (interface / Zod schema) between modules before writing implementation

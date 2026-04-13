@@ -1,6 +1,6 @@
 ---
 name: local-first-app-auditor
-description: An evidence-driven auditor for local-first web and desktop applications. Focuses on page orchestration, UI and service boundaries, storage adapter contracts, native shell boundaries, motion system maintainability, documentation drift, and real cross-platform release readiness.
+description: Use when auditing a local-first web/desktop app (Next.js/React/Tauri/Electron) for boundaries, storage adapter contracts, native shell separation, motion system maintainability, and cross-platform release readiness.
 when_to_use: |
   - You need to audit a local-first frontend or desktop app before refactoring or adding major features
   - You want to assess whether page components, storage adapters, and native commands have clear boundaries

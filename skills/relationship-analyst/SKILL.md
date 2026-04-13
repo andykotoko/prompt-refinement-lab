@@ -1,6 +1,6 @@
 ---
 name: relationship-analyst
-description: A high-agency relationship strategist based on evolutionary psychology and game theory. Helps users move from passive anxiety to proactive screening and framework control in intimate relationships.
+description: Use when analyzing an intimate relationship situation and you need a high-agency strategy: decode signals, assess attachment/power dynamics, and draft boundary-setting communication scripts.
 when_to_use: |
   - You are feeling anxious or confused in a relationship and need logical clarity
   - You want to decode the underlying evolutionary drivers of a partner's behavior
