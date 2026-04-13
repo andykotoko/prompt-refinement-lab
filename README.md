@@ -1,147 +1,181 @@
-<div align="center">
+# Prompt Refinement Lab
 
-# 🧪 Prompt Refinement Lab
+一个面向真实使用场景的 **Prompts + Skills** 仓库。
 
-一个系统化、可复用且经过实战优化的 **个人 AI 能力（Skills & Prompts）库**
+这里放的不是“看起来完整”的模板集合，而是我在实际工作流里反复打磨过、愿意继续维护的 AI 能力模块：有些适合直接复制到 ChatGPT / Claude 对话框里，有些适合挂到 Claude Code、Cursor 或自建 Agent 里反复调用。
 
-![License](https://img.shields.io/github/license/yuchenzhu-research/prompt-refinement-lab?style=for-the-badge&color=blue)
-![Stars](https://img.shields.io/github/stars/yuchenzhu-research/prompt-refinement-lab?style=for-the-badge&color=gold)
-![Last Commit](https://img.shields.io/github/last-commit/yuchenzhu-research/prompt-refinement-lab?style=for-the-badge&color=green)
-![Context](https://img.shields.io/badge/Context-Global_Citizen-orange?style=for-the-badge)
+## What This Repo Is
 
-</div>
+- 一个可复用的个人 AI 能力库
+- 一套按使用方式分开的双轨结构：`prompts/` 与 `skills/`
+- 一个持续迭代的工作台，而不是一次性整理完就不再维护的素材仓
 
----
+## What This Repo Is Not
 
-## 📖 设计理念
+- 不是面向所有场景的通用 prompt 大全
+- 不是只追求数量的“收集夹”
+- 不是把外部社区 skill 原样搬运后假装原创的镜像仓库
 
-本仓库旨在通过双轨制（Dual-Track）满足不同的 AI 交互需求：
+## Choose a Track
 
-1.  **Prompts (一次性调用)**：适用于 ChatGPT/Claude 网页端，即插即用，单点爆发力强。
-2.  **Skills (Agentic 系统调用)**：适用于 Claude Code, Cursor 或定制化 Agent，具备结构化的 YAML 定义，方便系统自动化检索与调用。
+### 用 `prompts/`
 
-### 什么时候用 Prompts vs Skills（快速决策）
+适合这些情况：
 
-- **用 `prompts/`**
-  - 你在 ChatGPT/Claude 网页端或手机端，无法读文件/跑命令
-  - 你想快速校准角色与输出结构，进行一次或一段时间的对话式产出
-- **用 `skills/`**
-  - 你在 Claude Code / Cursor / 自建 Agent 环境，Agent 可以读写仓库并执行工作流
-  - 你需要可重复执行、可审计、能约束工程行为的流程（如项目治理、审计、PRD/ADR、i18n 架构）
+- 你在 ChatGPT / Claude 网页端或手机端
+- 你不能让模型读取本地文件或执行命令
+- 你想快速切换角色、输出结构和思考框架
 
----
+使用方式：
 
-## ⚡️ Quick Start (快速开始)
+1. 打开 `prompts/` 目录
+2. 找到对应的 `.txt`
+3. 复制全文
+4. 粘贴到对话开头作为 system prompt 或开场白
 
-不管你是直接用还是配合 Agent 工具，只需两步即可上手。
+### 用 `skills/`
 
-### 1. 安装 (获取仓库)
+适合这些情况：
 
-如果你需要配合 Claude Code 或 Cursor 使用 Skills 模式，建议直接 Clone 到本地：
+- 你在 Claude Code、Cursor 或自建 Agent 环境
+- Agent 能读取仓库文件并按工作流执行
+- 你需要可重复、可审计、有触发条件的结构化能力
 
-```bash
-# Clone 到本地知识库目录
-git clone https://github.com/yuchenzhu-research/prompt-refinement-lab.git
-```
+使用方式：
 
-如果你只是想复制提示词，直接在 GitHub 页面浏览 `prompts/` 文件夹即可。
+1. clone 仓库到本地
+2. 让 Agent 能访问 `skills/` 目录
+3. 通过路径引用对应 `SKILL.md`
 
-### 2. 使用指南 (双模式)
+示例：
 
-#### 模式 A：Prompts (手动复制)
-> 适用场景：ChatGPT Plus, Claude Pro 网页端
-
-1. 进入 `prompts/` 文件夹。
-2. 打开你需要的 `.txt` 文件（例如 `english-writing.txt`）。
-3. **全选复制**内容。
-4. 粘贴到 AI 对话框（建议作为 System Prompt 或开场白）。
-
-#### 模式 B：Skills (Agent 集成)
-> 适用场景：Claude Code, Cursor, 自建 Agent
-
-**对于 Claude Code / MCP Server**:
-将本仓库的 `skills/` 目录配置为 Tool 或 Resource 路径，让 Agent 可以读取 `SKILL.md`。
-
-**对于 Cursor**:
-在项目的 `.cursorrules` 文件中，通过相对路径引用 Skill：
 ```markdown
-# 引用英语教练 Skill
 @skills/english-writing/SKILL.md
 ```
 
----
+## Quick Start
 
-## 🚀 Prompts List
+### Clone
 
-建议直接复制 `prompts/` 目录下的 `.txt` 内容。
-
-### 工程治理 / 可维护性
-
-| Prompt 模块 | 核心逻辑 | 适用场景 |
-| :--- | :--- | :--- |
-| **工程治理归一化与模式回灌** | 先做治理收束，再提炼可迁移的治理模式并回灌到其他仓库 | 工程规范化项目、治理文档栈整理、跨项目治理经验迁移 |
-| **项目锻造炉** | 多阶段可重入的项目治理骨架搭建、契约设计、PRD、ADR、漂移审计 | 新项目初始化、模块契约定义、功能规划、架构决策、持续治理 |
-| **项目总体体检官** | 仓库全链路审计与重构前评估 | 新项目接手、重构前盘点、治理规划 |
-| **Local-First 应用体检官** | 前端/桌面混合应用的架构收束与交付审计 | Tauri/Electron/Next.js 本地优先项目、图片与文件工作流、多平台发布 |
-| **国际化系统设计师** | Locale 仅为展示层、Schema 强制英文、禁止 locale 驱动的业务分叉 | 多语言项目架构设计、i18n 改造、国际化审计 |
-
-### 学习 / 写作 / 研究
-
-| Prompt 模块 | 核心逻辑 | 适用场景 |
-| :--- | :--- | :--- |
-| **全能英语教练** | 地道表达与学术规范 | 刷托福、改邮件、课业辅导 |
-| **百科全书系统** | 跨学科深度联结 | 系统化课题研究、学术深挖 |
-
-### 个人成长 / 关系
-
-| Prompt 模块 | 核心逻辑 | 适用场景 |
-| :--- | :--- | :--- |
-| **深度天赋挖掘** | 能量审计对话流 | 个人潜力分析、职业导向 |
-| **关系博弈策略** | 高主体性与理性沟通 | 关系内耗解决、边界设定 |
-
-### 创作者工作流
-
-| Prompt 模块 | 核心逻辑 | 适用场景 |
-| :--- | :--- | :--- |
-| **影像工程专家** | S-Log3 与色彩管理 | A7M5 拍摄及后期流程 |
-
----
-
-## 🛠️ Skills List
-
-位于 `skills/` 目录下，专为 **Agentic Tools** 优化。每个 Skill 都包含 `when_to_use` 触发条件。
-
-```text
-skills/
-├── project-forge/         # 项目治理骨架锻造与持续收敛模块
-├── project-auditor/       # 项目总体体检与审计模块
-├── local-first-app-auditor/ # Local-First 前端/桌面应用审计模块
-├── i18n-system-designer/  # 国际化系统架构设计模块
-├── english-writing/       # 全球英语教练模块
-├── encyclopedic-system/   # 跨学科百科系统
-├── talent-excavator/      # 深度天赋挖掘模块
-├── relationship-analyst/  # 关系博弈策略模块
-└── photography-workflow/  # 摄影/视频 SOP 模块
+```bash
+git clone https://github.com/yuchenzhu-research/prompt-refinement-lab.git
+cd prompt-refinement-lab
 ```
 
----
+### Fast Path
 
-## 📁 库结构
+- 只想直接拿来用：先看 `prompts/`
+- 想集成到 Agent：先看 `skills/`
+- 想找工程治理相关能力：从 `project-forge`、`project-auditor`、`engineering-governance-normalization` 开始
+
+## Repository Map
 
 ```text
 prompt-refinement-lab/
-├── prompts/                   # 用于手动复制的 .txt 指令
-├── skills/                    # 用于 Agent 调用的结构化模块
+├── prompts/                     # 一次性复制使用的 .txt prompt
+├── skills/                      # Agent 可调用的结构化 skill
 │   └── [skill-name]/
-│       └── SKILL.md           # Skill 定义文件
+│       ├── SKILL.md             # skill 主定义
+│       └── ATTRIBUTION.md       # 如有外部启发来源，在这里声明
 ├── README.md
 └── LICENSE
 ```
 
----
+## Prompt Modules
 
-## 📜 声明
+### 工程治理 / 可维护性
 
-这里的每一行指令都是为了减少重复劳动。我将在这个仓库中持续更新经过我验证有效的原子级能力。
+- `engineering-governance-normalization`
+  - 先做治理收束，再提炼可迁移模式并回灌到其他仓库
+- `project-forge`
+  - 治理骨架、契约设计、PRD、ADR、演进评估
+- `project-auditor`
+  - 仓库全链路体检、风险排序、重构前摸底
+- `local-first-app-auditor`
+  - Local-First 前端 / 桌面应用的架构与交付审计
+- `i18n-system-designer`
+  - Locale 只影响展示层，不污染 schema / contract / enum
+
+### 学习 / 写作 / 研究
+
+- `english-writing`
+  - 留学、托福、邮件、学术写作与地道表达
+- `encyclopedic-system`
+  - 跨学科知识组织与系统化研究
+
+### 个人成长 / 关系
+
+- `talent-excavator`
+  - 深度天赋挖掘与个人能力盘点
+- `relationship-analyst`
+  - 关系博弈、边界设定与理性沟通
+
+### 创作者工作流
+
+- `photography-workflow`
+  - 摄影 / 视频拍摄与后期 SOP
+
+## Skill Modules
+
+- `project-forge`
+  - 项目治理骨架、PRD、ADR、契约设计
+- `project-auditor`
+  - 全仓库总体体检与治理规划
+- `readme-for-developers`
+  - 把 `README.md` 做成开发者入口、入门地图和工作约定
+- `local-first-app-auditor`
+  - 本地优先应用架构审计
+- `i18n-system-designer`
+  - 国际化架构与文档分层
+- `english-writing`
+  - 英语表达、语域与学术写作
+- `encyclopedic-system`
+  - 百科式知识组织
+- `talent-excavator`
+  - 天赋与优势挖掘
+- `relationship-analyst`
+  - 关系分析与策略
+- `photography-workflow`
+  - 摄影 / 视频工作流
+
+## Documentation Boundaries
+
+这个仓库当前的文档分工很简单：
+
+- `README.md`
+  - 仓库入口：告诉你这里是什么、怎么用、从哪开始
+- `prompts/*.txt`
+  - 一次性 prompt 本体
+- `skills/*/SKILL.md`
+  - Agent skill 本体
+- `skills/*/ATTRIBUTION.md`
+  - 如果某个 skill 受外部社区内容启发，在这里保留来源与许可说明
+
+换句话说，README 负责“带你找到东西”，不负责把每个模块的全部细节再讲一遍。
+
+## Attribution Policy
+
+本仓库允许引入公开社区 skill 的思路，但默认遵守以下规则：
+
+- 不把外部 skill 原样搬来后当作原创发布
+- 本地版本会按本仓库风格和使用场景重写
+- 只要某个 skill 明显受外部社区内容启发，就在对应目录下保留 `ATTRIBUTION.md`
+- 仓库 README 会集中说明哪些 skill 带有外部来源
+
+当前已明确标注来源的模块：
+
+- [skills/readme-for-developers/SKILL.md](skills/readme-for-developers/SKILL.md)
+  - 具体来源见 [skills/readme-for-developers/ATTRIBUTION.md](skills/readme-for-developers/ATTRIBUTION.md)
+
+## Maintenance Notes
+
+这个仓库会继续增删改，不保证模块数量稳定，但会尽量保证两件事：
+
+- 保留下来的模块都有明确用途
+- 每个模块的边界尽量清楚，不互相长成重复版本
+
+如果某个 prompt 或 skill 被明显收束、合并或替换，我会优先更新仓库结构和说明，而不是让 README 长期漂移。
+
+## License
 
 本项目采用 [MIT License](./LICENSE) 协议。
