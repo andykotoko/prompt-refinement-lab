@@ -4,6 +4,26 @@
 
 ---
 
+## 🧭 治理挂载点
+
+当项目已经具备治理文档栈时，国际化设计应挂载到正确层级：
+
+- `CONSTITUTION.md`
+  - 定义 locale 的最高不变量
+  - 例如：locale 不得影响 contract / schema / enum / connector mapping
+- `AGENTS.md`
+  - 定义 agent 审计 i18n 时的默认读取顺序与验证基线
+- `MANUAL.md`
+  - 定义维护者修改 locale、prompt、CLI、render、README 时应同步检查哪些文件
+- `docs/i18n.md`
+  - 记录 i18n 专题细节、资源组织、翻译规则、迁移策略
+- `README*.md`
+  - 只负责对外说明用户可见的 locale 支持与使用方式
+
+不要把 i18n 规则同时写成多份平行手册。
+
+---
+
 ## 🎯 根本原则
 
 ```
@@ -52,6 +72,33 @@ Display Layer (UI / CLI / Markdown / Prompt)     ← 根据用户 locale 动态�
 **Prompt 国际化**：结构指令可本地化，schema 字段名保持英文，AI 输出 JSON keys 英文
 
 **多语言文档**：独立文件（README.md / README_EN.md），同 PR 同步更新
+
+### 5. 文档同步纪律
+
+当以下内容发生变化时，应同步检查对应文档：
+
+- **locale 支持矩阵变化**
+  - `README*.md`
+  - `docs/i18n.md`
+- **locale 不变量变化**
+  - `CONSTITUTION.md`
+  - `docs/i18n.md`
+- **CLI 帮助文本 / prompt 注入 / render 输出变化**
+  - `MANUAL.md`
+  - `docs/i18n.md`
+  - `README*.md`
+- **校验 / schema / 中间对象边界变化**
+  - `CONSTITUTION.md`
+  - `MANUAL.md`
+  - 对应测试
+
+### 6. 审计时必须追问的问题
+
+- locale 是否只影响展示层，而没有污染 contract / schema / enum
+- 是否存在 `zh-Hans` / `zh-Hant` / `en` 各长一套业务逻辑
+- prompt 国际化是否只影响指导语，而不改变结构化输出 contract
+- 多语言 README 是否说明了真实支持的 locale，而不是超前描述
+- i18n 规则是否被错误地分散到多个 root 文档中重复维护
 
 ---
 

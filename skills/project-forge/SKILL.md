@@ -1,6 +1,6 @@
 ---
 name: project-forge
-description: Use when you need to bootstrap or enforce project governance (AGENTS.md/CONSTITUTION.md/MANUAL.md), define module boundaries/contracts, write a PRD/ADR, or audit doc↔code drift in an active repo.
+description: Use when you need to build or tighten a governance stack (AGENTS.md/CONSTITUTION.md/MANUAL.md), define module boundaries/contracts, write a PRD/ADR, or assess governance/doc drift in an active repo.
 when_to_use: |
   - You are starting a new project and need a governance skeleton (AGENTS.md, CONSTITUTION.md, MANUAL.md)
   - You want to define typed contracts (interface / Zod schema) between modules before writing implementation
@@ -15,6 +15,34 @@ when_to_use: |
 你是一位工程化项目治理专家。目标不是生成样板文件，而是为项目建立**可执行、可审计、可演进**的治理体系。
 
 > **核心信条**：治理文档不是写给人类看的装饰品，而是写给 AI 代理执行的控制面。
+
+## 治理文档栈模式（推荐默认）
+
+当项目需要 agent 治理文件时，优先采用如下分层，而不是堆多个平行说明文件：
+
+1. **`CONSTITUTION.md`**：最高治理文件，定义项目身份、不变量、架构守卫、质量门禁、风险登记簿、反模式。
+2. **`AGENTS.md`**：共享 cross-agent 运行手册，定义默认读取顺序、协作 pipeline、验证基线、文档同步纪律。
+3. **`MANUAL.md`**：维护者手册，定义仓库结构、权威来源、维护检查清单、调试入口、已知限制。
+4. **工具特定 shim**（如 `CLAUDE.md`）：薄兼容层，只保留工具特定说明，显式继承治理文档栈。
+5. **专题文档**（如 `docs/ARCHITECTURE.md`、`docs/TESTING-CI.md`、`docs/VALIDATION_BASELINE.md`、`docs/REPOSITORY_BOUNDARY.md`）：按任务类型提供细节，而不是把一切塞进顶层治理文件。
+6. **`README*.md`**：面向用户的产品入口，不替代治理文件。
+
+### 默认读取顺序
+
+1. 先读 `CONSTITUTION.md`
+2. 再读 `AGENTS.md`
+3. 再读 `MANUAL.md`
+4. 再读与任务直接相关的专题文档
+5. 如工具自动读取 `CLAUDE.md` 等 shim，将其视为 overlay，不是第二本手册
+
+## 真相来源规则
+
+治理工作时，必须同时区分：
+
+- **规范真相**：`CONSTITUTION.md` > `AGENTS.md` > `MANUAL.md` > tool shims > `docs/` / `README*.md`
+- **行为真相**：真实入口代码、顶层 scripts、tests、CI / workflows
+
+两者冲突时，不要假装它们天然一致；应先记录漂移，再决定文档收束还是实现回归。
 
 ## 运行模式
 
@@ -33,6 +61,7 @@ when_to_use: |
 - 当任务只是润色一段文案、修一处 UI 文案、改一个变量名时，不必输出 PRD 或 ADR
 - 当目标仓库几乎没有结构信息，且用户只想要一个快速想法时，可以先给轻量建议，而不是立即生成整套治理文档
 - 当用户明确只要“直接实现”，且问题边界非常清楚时，可只借用本 skill 的局部原则（如 contract-first / doc sync），不必展开四个模式
+- 当用户要的是 README / 结构 / 代码冗余 / legacy / tests / CI 的**全盘体检**时，优先使用 `project-auditor`
 
 ## Quick Reference
 
@@ -42,6 +71,12 @@ when_to_use: |
 | 规划一个功能 | **Plan** | PRD / 模块边界 / 契约草案 |
 | 检查文档与代码是否漂移 | **Audit** | 问题清单 / 修复建议 / 路线图 |
 | 评估新能力能否接入现有系统 | **Evolve** | 扩展点评估 / 风险 / 文档更新建议 |
+
+## 与相邻能力的边界
+
+- `project-forge`：负责**治理搭建、契约规划、ADR、演进评估**
+- `project-auditor`：负责**全仓库总体体检**
+- `engineering-governance-normalization` prompt：负责**治理文档栈收束与模式回灌**
 
 ---
 
@@ -71,7 +106,8 @@ when_to_use: |
 - 极简、引用优先：能引用现有 skill 就不重复写
 - 短标题 + 短 bullets，不写大段 prose
 - 只保留 repo-specific 的规则，不写泛泛的好习惯
-- 如果同时需要 CLAUDE.md 等别名，用 symlink 而非复制
+- 如果需要 `CLAUDE.md` 等工具入口文件，让它保持薄、显式继承 `AGENTS.md`，不要复制一整份规则
+- 不要让多个 agent 入口文件各自维护一套平行规则
 
 **必须包含的章节**：
 
@@ -88,6 +124,20 @@ when_to_use: |
 4. 执行任务
 5. 同步文档（如果结构发生变化）
 6. 报告完成状态
+
+## Default Reading Order
+1. `CONSTITUTION.md`
+2. `AGENTS.md`
+3. `MANUAL.md`
+4. 与当前任务相关的专题文档
+
+## Document Responsibilities
+- `CONSTITUTION.md` = 最高治理
+- `AGENTS.md` = 共享 agent 手册
+- `MANUAL.md` = 维护者手册
+- `CLAUDE.md` / 其他 shim = 工具兼容层
+- `docs/*.md` = 专题说明
+- `README*.md` = 用户入口
 
 ## Directory Structure
 [关键目录 + 一句话职责说明]
@@ -113,6 +163,11 @@ when_to_use: |
 ## Reporting After Completion
 - [任务完成后必须报告什么]
 ```
+
+**工具特定文件规则**：
+- 只有当某个工具真的会自动读取对应文件时，才创建 `CLAUDE.md`、`GEMINI.md` 等 shim
+- 如果项目只需要一个共享入口，保留 `AGENTS.md` 即可
+- 不要为了“看起来完整”复制出多个内容相同的入口文件
 
 **嵌套 AGENTS.md 规则**：
 - 子目录可以有自己的 AGENTS.md，覆盖 root 级别的通用规则
@@ -291,14 +346,22 @@ when_to_use: |
 - 用户说"看看文档有没有过时"、"检查一下项目状态"
 - 任何重大变更后的常规检查
 
+说明：这里的 Audit 偏**治理 / 契约 / 文档漂移审计**。如果用户要的是 README、结构、代码冗余、legacy、tests/CI、增长弹性的**全仓库总体体检**，优先使用 `project-auditor`。
+
 ### 审计维度
 
 #### 1. 治理文档一致性
+- 治理文档栈是否分工清楚：`CONSTITUTION.md` / `AGENTS.md` / tool shim / 专题文档是否各司其职
+- `MANUAL.md` 是否真的承担维护者手册职责，而不是复制 `AGENTS.md`
+- 是否存在两个以上平行 agent 入口文件互相漂移
+- 是否存在工具 shim 复制了整份共享手册
 - AGENTS.md 的 Directory Structure 是否反映真实目录
 - AGENTS.md 的 Essential Commands 是否还能跑
 - AGENTS.md 的 Tech Stack 是否与 package.json / pyproject.toml 一致
 - CONSTITUTION.md 的约束是否被代码违反
 - MANUAL.md 的操作指南是否还准确
+- 默认读取顺序与真实入口代码 / tests / CI 是否一致
+- 文档是否还引用不存在的验证矩阵、阶段文件或过时入口
 
 #### 2. 契约完整性
 - 模块边界是否有 typed interface / Zod schema
