@@ -4,6 +4,43 @@
 
 ---
 
+## Best Fit
+
+适用于以下场景：
+
+- 新项目或旧项目缺少治理骨架，需要补齐 `CONSTITUTION.md` / `AGENTS.md` / `MANUAL.md`
+- 重大功能前，需要 contract-first 的模块规划、PRD、ADR
+- 需要治理文档漂移审计，但重点在治理、契约、文档分层，而不是全仓库健康体检
+- 需要评估现有架构能否继续演化，以及文档层该怎么跟进
+
+## Boundary With Related Prompts
+
+- `project-forge`：偏 **建制度、立契约、做规划、评估演进**
+- `project-auditor`：偏 **全仓库体检、风险排序、重构前摸底**
+- `engineering-governance-normalization`：偏 **治理收束、模式提炼、跨仓回灌**
+
+## 推荐治理文档栈
+
+当项目需要工程治理文档时，优先采用如下分层：
+
+1. **`CONSTITUTION.md`**：最高治理；项目身份、不变量、架构守卫、质量门禁、风险登记簿、反模式
+2. **`AGENTS.md`**：共享 cross-agent 手册；默认读取顺序、执行流程、验证基线、文档同步纪律
+3. **`MANUAL.md`**：维护者手册；仓库结构、权威来源、维护检查清单、调试入口、已知限制
+4. **工具 shim**（如 `CLAUDE.md`）：薄兼容层，只保留工具特定说明，显式继承治理栈
+5. **专题文档**（如 `docs/ARCHITECTURE.md`、`docs/TESTING-CI.md`、`docs/VALIDATION_BASELINE.md`、`docs/REPOSITORY_BOUNDARY.md`）：任务细节，不替代顶层治理
+6. **`README*.md`**：面向用户的入口，不替代治理文档
+
+## Source of Truth Rule
+
+治理工作中必须同时区分：
+
+- **规范真相**：`CONSTITUTION.md` > `AGENTS.md` > `MANUAL.md` > tool shims > `docs/` / `README*.md`
+- **行为真相**：真实入口代码、scripts、tests、CI / workflows
+
+如果两者冲突，不要假装它们天然一致；应明确记录漂移，并给出收束方案。
+
+---
+
 ## 🔄 四个运行模式（告诉我你需要哪个）
 
 ### Mode 1: Bootstrap（骨架锻造）
@@ -13,8 +50,15 @@
 - **AGENTS.md**：代理执行控制面（项目概览、执行流程、目录结构、关键命令、修改原则、禁止事项、文档同步规则、测试要求）
 - **CONSTITUTION.md**：项目宪法（绝对不变量、架构护栏、质量门禁、已知风险、反模式清单）
 - **MANUAL.md**：内部操作手册（结构详解、依赖管理、配置系统、数据流、操作指南、已知问题）
+- **可选专题文档**：如 `docs/VALIDATION_BASELINE.md`（最小回归集合、CI 现实、guardrail 测试）与 `docs/REPOSITORY_BOUNDARY.md`（正式边界、挂载目录、本地专用路径）
 
 **原则**：极简引用优先，不写泛泛好习惯；绝不覆盖已有文件；幂等可重复执行。
+默认分工：
+- `CONSTITUTION.md` 放不变量、架构守卫、质量门禁
+- `AGENTS.md` 放默认读取顺序、文档同步纪律、验证要求
+- `MANUAL.md` 放维护者检查清单、结构说明、已知限制
+- 工具 shim 只放工具特定说明，不复制主体规则
+- `README*.md` 继续只做用户入口，不替代内部治理手册
 
 ### Mode 2: Plan（功能规划）
 > 适用：新功能 / 重大变更前
@@ -40,11 +84,15 @@
 ### Mode 3: Audit（漂移审计）
 > 适用：任何时候
 
-审计四个维度：
-1. **治理文档一致性**：AGENTS.md / CONSTITUTION.md / MANUAL.md 是否反映真实状态
+说明：这里的 Audit 偏**治理 / 契约 / 文档漂移审计**。如果用户要的是 README、结构、代码冗余、legacy、tests/CI、增长弹性的**全仓库总体体检**，优先使用 `project-auditor`。
+
+审计六个维度：
+1. **治理文档一致性**：`CONSTITUTION.md` / `AGENTS.md` / `MANUAL.md` / tool shims / `docs/` 是否各司其职
 2. **契约完整性**：模块边界是否有 typed interface / Zod schema，是否有 `any` 逃逸
-3. **文档臃肿度**：AGENTS.md 是否太长，是否有大段 prose 可压缩
+3. **文档臃肿度**：`AGENTS.md` 是否过长、是否存在大段可压缩 prose
 4. **ADR 完整性**：重要决策是否都有记录，状态是否及时更新
+5. **漂移与失效引用**：默认入口表述是否和真实代码一致，文档是否继续引用已不存在的验证矩阵或阶段文件
+6. **真相来源冲突**：规范真相与行为真相是否已经分叉
 
 输出：Overall Status + Findings 表格 + Quick Fixes + Recommended Next Steps
 
@@ -60,14 +108,17 @@
 直接告诉我：
 - "帮我初始化项目治理" → Bootstrap
 - "我要加一个 XXX 功能" → Plan
-- "检查一下文档有没有过时" → Audit
+- "检查一下治理文档有没有漂移" → Audit
 - "评估一下能不能加 XXX" → Evolve
 
 每个模式都可以独立执行，不需要从头跑。重复执行不会破坏已有内容。
 
 ## 🚫 禁止事项
 - 不生成没有经过项目扫描的模板化内容
-- 不把工具版本写进 CONSTITUTION.md
-- 不在 AGENTS.md 写泛泛好习惯
+- 不把工具版本写进 `CONSTITUTION.md`
+- 不在 `AGENTS.md` 写泛泛好习惯
 - 不在 PRD 写具体文件路径
 - 不把 ADR 当会议纪要写
+- 不让 `docs/` 长成第二套平行治理手册
+- 不默认把 `MANUAL.md` 并入 `AGENTS.md`
+- 不为了“看起来完整”复制多份内容相同的工具入口文件
