@@ -138,6 +138,28 @@ prompt-refinement-lab/
 - `photography-workflow`
   - 摄影 / 视频工作流
 
+## Module Availability
+
+不是每个模块都必须同时提供 prompt 和 skill。当前仓库刻意保留三种形态：
+
+- **Prompt + Skill 双轨**
+  - `project-forge`
+  - `project-auditor`
+  - `local-first-app-auditor`
+  - `i18n-system-designer`
+  - `english-writing`
+  - `encyclopedic-system`
+  - `talent-excavator`
+  - `relationship-analyst`
+  - `photography-workflow`
+- **只保留 Prompt**
+  - `engineering-governance-normalization`
+  - `engineering-governance-normalization-en`
+- **只保留 Skill**
+  - `readme-for-developers`
+
+这不是缺漏，而是按使用场景决定：有些模块更适合网页端一次性调用，有些更适合 Agent 挂载，有些则同时保留双轨版本。
+
 ## Documentation Boundaries
 
 这个仓库当前的文档分工很简单：
