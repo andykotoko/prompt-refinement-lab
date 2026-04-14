@@ -2,7 +2,7 @@
 
 一个面向真实使用场景的 **Prompts + Skills** 仓库。
 
-这里放的不是“看起来完整”的模板集合，而是我在实际工作流里反复打磨过、愿意继续维护的 AI 能力模块：有些适合直接复制到 ChatGPT / Claude 对话框里，有些适合挂到 Claude Code、Cursor 或自建 Agent 里反复调用。
+这里放的不是“看起来完整”的模板集合，而是我在实际工作流里反复打磨过、愿意继续维护的 AI 能力模块：有些适合直接复制到 ChatGPT / Gemini / Claude 对话框里，有些适合挂到 Codex、Antigravity、Claude Code 或自建 Agent 里反复调用。
 
 ## What This Repo Is
 
